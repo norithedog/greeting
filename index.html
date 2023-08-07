@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Irish Greeting Widget</title>
+    <style>
+      /* Load the Mabry Pro font files */
+      @font-face {
+        font-family: 'Mabry Pro';
+        src: url('https://fonts.googleapis.com/css2?family=Mabry+Pro:wght@400;700&display=swap');
+        font-weight: normal;
+        font-style: normal;
+      }
+      
+      /* Set font family, font weight, and text transform for the entire widget */
+      body {
+        background-color: transparent;
+        margin: 0;
+        padding: 0;
+        font-family: 'Mabry Pro', sans-serif;
+        font-weight: bold;
+        font-size: 25px; /* smaller font size */
+        letter-spacing: 1px;
+        color: #1c1c1c; /* Updated font color */
+      }
+      
+      /* Style for the table */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      /* Style for table cells */
+      th, td {
+        border: none;
+        font-size: 25px; /* smaller font size */
+        padding: 8px;
+        text-align: center;
+        width: 33.33%;
+      }
+      
+      /* Style for the greeting cell */
+      .greeting {
+        font-size: 25px; /* smaller font size */
+        text-align: left;
+      }
+      
+      /* Style for the date cell */
+      .date {
+        font-size: 25px; /* smaller font size */
+      }
+      
+      /* Style for the time cell */
+      .time {
+        font-size: 25px; /* smaller font size */
+        text-align: right;
+      }
+      
+      /* Style for the widget container */
+      .widget-container {
+        background-color: #f7f7f7; /* Updated container color */
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="widget-container">
+      <table>
+        <tr>
+          <td class="greeting">
+            <!-- Display the appropriate greeting based on the current time -->
+            <script>
+              var now = new Date();
+              var hours = now.getHours();
+              var greeting = '';
+              if (hours >= 5 && hours < 12) {
+                greeting = 'Maidin Mhaith!';
+              } else if (hours >= 12 && hours < 22) {
+                greeting = 'Tráthnóna Maith!';
+              } else {
+                greeting = 'Oíche Mhaith';
+              }
+              document.write(greeting);
+            </script>
+          </td>
+          <td class="date">
+            <!-- Display the current date in the desired format -->
+            <script>
+              var days = ['Domhnaigh', 'Luain', 'Máirt', 'Céadaoin', 'Déardaoin', 'Aoine', 'Sathairn'];
+              var months = ['Eanáir', 'Feabhra', 'Márta', 'Aibreán', 'Bealtaine', 'Meitheamh', 'Iúil', 'Lúnasa', 'Meán Fómhair', 'Deireadh Fómhair', 'Samhain', 'Nollaig'];
+              var now = new Date();
+              var dayOfWeek = days[now.getDay()];
+              var day = now.getDate();
+              var month = months[now.getMonth()];
+              var dateString = dayOfWeek + ', ' + day + ' ' + month;
+              document.write(dateString);
+            </script>
+          </td>
+          <td class="time">
+            <!-- Display the current time using JavaScript -->
+            <script>
+              function updateTime() {
+                var now = new Date();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+                var ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // Handle midnight
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+                var timeString = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+                document.getElementById('time').innerHTML = timeString;
+              }
+              setInterval(updateTime, 1000);
+            </script>
+            <span id="time"></span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
